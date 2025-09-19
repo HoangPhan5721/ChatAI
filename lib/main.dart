@@ -1,23 +1,27 @@
 import 'package:flutter/material.dart';
-import 'features/number_trivia/presentation/pages/number_trivia_page.dart';
-import 'injection_container.dart' as di;
+import 'core/navigator.dart';
+import 'core/routes.dart';
 
-void main() async {
+void main() {
+  print('main: Starting app');
   WidgetsFlutterBinding.ensureInitialized();
-  await di.init();
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Number Trivia',
+      title: 'Skin Scanner',
       theme: ThemeData(
-        primaryColor: Colors.green.shade800,
-        accentColor: Colors.green.shade600,
+        colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blue)
+            .copyWith(secondary: Colors.blue.shade600),
       ),
-      home: NumberTriviaPage(),
+      navigatorKey: AppNavigator().navigatorKey,
+      onGenerateRoute: AppRoutes.generateRoute,
+      initialRoute: '/login',
     );
   }
 }
